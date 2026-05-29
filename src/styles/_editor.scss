@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background: #e8e8e8;
 }
 
 #root {
@@ -8,24 +9,31 @@ body {
     top: 0;
     bottom: 0;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-container {
+    aspect-ratio: 1 / 1.41421356;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
 }
 
 .map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 1;
+    flex: 1;
+    min-height: 0;
 }
 
 .editor-toolbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: 999;
-    // width: 20%;
     width: 260px;
-    // height: 100px;
     background: #fff;
     border: solid 1px #ccc;
     border-radius: 4px;

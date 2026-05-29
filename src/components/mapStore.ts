@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { LatLngTuple } from "@googlemaps/polyline-codec";
-import { StravaToken, loadStoredToken, saveToken, clearToken } from '@/util/strava'
+import { StravaToken, StravaActivity, loadStoredToken, saveToken, clearToken } from '@/util/strava'
 
 export type Marker = {
     color: string
@@ -16,6 +16,7 @@ interface MapStore {
     showEndMarker: boolean
     stravaToken: StravaToken | null
     selectedActivityId: number | null
+    selectedActivity: StravaActivity | null
     setCoordinates: (coordinates: LatLngTuple[]) => void
     setStartMarker: (marker: Marker) => void
     setEndMarker: (marker: Marker) => void
@@ -24,6 +25,7 @@ interface MapStore {
     setStravaToken: (token: StravaToken) => void
     clearStravaToken: () => void
     setSelectedActivityId: (id: number | null) => void
+    setSelectedActivity: (activity: StravaActivity | null) => void
 }
 
 export const useMapStore = create<MapStore>((set) => ({
@@ -35,6 +37,7 @@ export const useMapStore = create<MapStore>((set) => ({
     showEndMarker: false,
     stravaToken: loadStoredToken(),
     selectedActivityId: null,
+    selectedActivity: null,
 
     setCoordinates: (coordinates) => set({ coordinates }),
     setStartMarker: (marker) => set({ startMarker: marker }),
@@ -42,8 +45,9 @@ export const useMapStore = create<MapStore>((set) => ({
     toggleStartMarker: () => set((state) => ({ showStartMarker: !state.showStartMarker })),
     toggleEndMarker: () => set((state) => ({ showEndMarker: !state.showEndMarker })),
     setStravaToken: (token) => { saveToken(token); set({ stravaToken: token }); },
-    clearStravaToken: () => { clearToken(); set({ stravaToken: null }); },
+    clearStravaToken: () => { clearToken(); set({ stravaToken: null, selectedActivity: null }); },
     setSelectedActivityId: (id) => set({ selectedActivityId: id }),
+    setSelectedActivity: (activity) => set({ selectedActivity: activity }),
 
 }))
 

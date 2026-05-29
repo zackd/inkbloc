@@ -1,0 +1,72 @@
+$orange: #fc4c02;
+
+.activity-details {
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.elevation-chart {
+    display: block;
+    width: 100%;
+    height: 64px;
+    background: #f5f5f5;
+
+    path {
+        fill: #c8c8c8;
+    }
+
+    &--empty {
+        height: 64px;
+        background: #f5f5f5;
+    }
+}
+
+.activity-details__body {
+    padding: 10px 16px 14px;
+}
+
+.activity-details__name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 800;
+    color: $orange;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+.activity-details__date {
+    margin: 2px 0 10px;
+    font-size: 12px;
+    color: #333;
+}
+
+.activity-details__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid #e8e8e8;
+    border-left: 1px solid #e8e8e8;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 7px 8px;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.stat-item__value {
+    font-size: 12px;
+    font-weight: 700;
+    color: $orange;
+    line-height: 1;
+}
+
+.stat-item__label {
+    font-size: 10px;
+    color: #888;
+    line-height: 1;
+}

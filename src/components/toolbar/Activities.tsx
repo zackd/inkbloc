@@ -19,6 +19,7 @@ export function Activities() {
     const setStravaToken = useMapStore((state) => state.setStravaToken);
     const clearStravaToken = useMapStore((state) => state.clearStravaToken);
     const setSelectedActivityId = useMapStore((state) => state.setSelectedActivityId);
+    const setSelectedActivity = useMapStore((state) => state.setSelectedActivity);
     const setCoordinates = useMapStore((state) => state.setCoordinates);
 
     const [dropdownValue, setDropdownValue] = useState<TObjectDropdownOption | undefined>(undefined);
@@ -60,6 +61,7 @@ export function Activities() {
         setDropdownValue(toOption(fetchedActivity));
         setSelectedActivityId(fetchedActivity.id);
         setCoordinates(decodePolyline(fetchedActivity.map.summary_polyline));
+        setSelectedActivity(fetchedActivity);
         setSearchQuery(undefined);
         setUrlActivityId(null);
     }, [fetchedActivity]);
@@ -70,6 +72,7 @@ export function Activities() {
         setDropdownValue(option);
         setSelectedActivityId(activity.id);
         setCoordinates(decodePolyline(activity.map.summary_polyline));
+        setSelectedActivity(activity);  // store for ActivityDetails in Editor
     };
 
     const handleSearchQueryChange = (q: string | undefined) => {

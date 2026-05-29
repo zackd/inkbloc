@@ -14,10 +14,23 @@ export type StravaActivity = {
     id: number;
     name: string;
     type: string;
-    distance: number;       // metres
-    moving_time: number;    // seconds
+    distance: number;              // metres
+    moving_time: number;           // seconds
     start_date: string;
     map: { summary_polyline: string };
+    total_elevation_gain?: number; // metres
+    average_speed?: number;        // m/s
+    max_speed?: number;            // m/s
+    calories?: number;
+};
+
+export type ActivityStreams = {
+    altitude?: {
+        data: number[];
+        series_type: string;
+        original_size: number;
+        resolution: string;
+    };
 };
 
 const STORAGE_KEY = 'strava_token';
@@ -113,4 +126,13 @@ export async function getActivity(accessToken: string, id: number): Promise<Stra
     });
     if (!res.ok) throw new Error(`Activity fetch failed: ${res.status}`);
     return res.json() as Promise<StravaActivity>;
+}
+
+export async function getActivityStreams(accessToken: string, id: number): Promise<ActivityStreams> {
+    const res = await fetch(
+        `https://www.strava.com/api/v3/activities/${id}/streams?keys=altitude&key_by_measurement_type=true`,
+        { headers: { Authorization: `Bearer ${accessToken}` } },
+    );
+    if (!res.ok) throw new Error(`Streams fetch failed: ${res.status}`);
+    return res.json() as Promise<ActivityStreams>;
 }
