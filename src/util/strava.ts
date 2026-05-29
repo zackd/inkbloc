@@ -128,11 +128,21 @@ export async function getActivity(accessToken: string, id: number): Promise<Stra
     return res.json() as Promise<StravaActivity>;
 }
 
+type RawStream = {
+    type: string;
+    data: number[];
+    series_type: string;
+    original_size: number;
+    resolution: string;
+};
+
 export async function getActivityStreams(accessToken: string, id: number): Promise<ActivityStreams> {
     const res = await fetch(
-        `https://www.strava.com/api/v3/activities/${id}/streams?keys=altitude&key_by_measurement_type=true`,
+        `https://www.strava.com/api/v3/activities/${id}/streams?keys=altitude`,
         { headers: { Authorization: `Bearer ${accessToken}` } },
     );
     if (!res.ok) throw new Error(`Streams fetch failed: ${res.status}`);
-    return res.json() as Promise<ActivityStreams>;
+    const raw = await res.json() as RawStream[];
+    const altitude = raw.find((s) => s.type === 'altitude');
+    return { altitude };
 }
