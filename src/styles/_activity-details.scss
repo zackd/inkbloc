@@ -24,7 +24,7 @@ $orange: #fc4c02;
 
 .activity-details__body {
     background: #fff;
-    padding: 10px 16px 14px;
+    padding: 10px 0 0;
 }
 
 .activity-details__name {
@@ -47,17 +47,17 @@ $orange: #fc4c02;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    border-top: 1px solid #e8e8e8;
-    border-left: 1px solid #e8e8e8;
+    // border-top: 1px solid #e8e8e8;
+    // border-left: 1px solid #e8e8e8;
 }
 
 .stat-item {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 7px 8px;
-    border-right: 1px solid #e8e8e8;
-    border-bottom: 1px solid #e8e8e8;
+    padding: 7px 0;
+    // border-right: 1px solid #e8e8e8;
+    // border-bottom: 1px solid #e8e8e8;
 }
 
 .stat-item__value {

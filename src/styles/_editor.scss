@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background: #e8e8e8;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #root {
@@ -16,11 +17,13 @@ body {
 
 .map-container {
     aspect-ratio: 1 / 1.41421356;
-    height: 100vh;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    padding: 1.5em;
+    background: #fff;
 }
 
 .map {
