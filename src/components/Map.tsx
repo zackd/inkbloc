@@ -17,6 +17,16 @@ export function Map() {
   const showStartMarker = useMapStore((state) => state.showStartMarker);
   const showEndMarker = useMapStore((state) => state.showEndMarker);
 
+  // Resize map canvas whenever the container changes size
+  useEffect(() => {
+    if (!mapContainer.current) return;
+    const observer = new ResizeObserver(() => {
+      map.current?.resize();
+    });
+    observer.observe(mapContainer.current);
+    return () => observer.disconnect();
+  }, []);
+
   // Init map once with empty track source
   useEffect(() => {
     if (!mapContainer.current || map.current) return;

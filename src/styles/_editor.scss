@@ -26,6 +26,7 @@ body {
 .map {
     flex: 1;
     min-height: 0;
+    overflow: hidden;
 }
 
 .editor-toolbar {
