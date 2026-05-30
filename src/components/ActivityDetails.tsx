@@ -1,57 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import type { StravaActivity } from '@/util/strava';
 import { getActivityStreams } from '@/util/strava';
+import {
+    formatDistance,
+    formatDuration,
+    formatSpeed,
+    formatElevation,
+    formatDate,
+    buildElevationPath,
+} from '@/util/format';
 
 type Props = {
     activity: StravaActivity;
     accessToken: string;
 };
-
-function formatDistance(metres: number): string {
-    return `${(metres / 1000).toFixed(1)}km`;
-}
-
-function formatDuration(seconds: number): string {
-    const h = Math.floor(seconds / 3600);
-    const m = Math.floor((seconds % 3600) / 60);
-    const s = seconds % 60;
-    return h > 0
-        ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-        : `${m}:${String(s).padStart(2, '0')}`;
-}
-
-function formatSpeed(ms: number | undefined): string {
-    if (ms == null) return '—';
-    return `${((ms * 3600) / 1000).toFixed(1)}km/h`;
-}
-
-function formatElevation(metres: number | undefined): string {
-    if (metres == null) return '—';
-    return `${Math.round(metres)}m`;
-}
-
-function formatDate(isoString: string): string {
-    return new Date(isoString).toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    });
-}
-
-function buildElevationPath(data: number[], width: number, height: number): string {
-    if (data.length < 2) return '';
-    const min = Math.min(...data);
-    const max = Math.max(...data);
-    const range = max - min || 1;
-    const step = Math.max(1, Math.floor(data.length / 300));
-    const sampled = data.filter((_, i) => i % step === 0);
-    const pts = sampled.map((v, i) => {
-        const x = (i / (sampled.length - 1)) * width;
-        const y = height - ((v - min) / range) * (height * 0.85);
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-    });
-    return `M0,${height} L${pts.join(' L')} L${width},${height} Z`;
-}
 
 function ElevationChart({ data }: { data: number[] }) {
     const W = 300;
