@@ -9,10 +9,11 @@ $orange: #fc4c02;
     display: block;
     width: 100%;
     height: 64px;
-    background: #f5f5f5;
+    background: rgb(255 255 255 / 80%);
 
     path {
-        fill: #c8c8c8;
+        fill: #444;
+        opacity: 1;
     }
 
     &--empty {
@@ -22,6 +23,7 @@ $orange: #fc4c02;
 }
 
 .activity-details__body {
+    background: #fff;
     padding: 10px 16px 14px;
 }
 
